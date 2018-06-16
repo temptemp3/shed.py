@@ -4,7 +4,7 @@
 
 **requirements and instalation**
 
-requires <u>python-slackclient</u>
+requires python-slackclient
 
 ```
 pip install slackclient
@@ -13,6 +13,8 @@ pip install slackclient
 see [python-slackclient requirements and installation](https://github.com/slackapi/python-slackclient#requirements-and-installation)
 
 **environment**
+
+may add to .bashrc
 
 ```
 alias shed='python /path/to/shed.py'
