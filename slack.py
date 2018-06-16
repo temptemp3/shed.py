@@ -1,7 +1,7 @@
 #!/usr/bin/python
 ## slack.py
 ## - slack functions
-## version 0.0.2 - working
+## version 0.0.3 - support human-friendly arguments
 ##################################################
 #
 #    METHODS
@@ -25,6 +25,11 @@ from slackclient import SlackClient
 ##################################################
 ## functions
 ##################################################
+def list_channel_names():
+    for channel in channels["channels"]:
+        print channel["name"]
+
+#-------------------------------------------------
 # channels.list
 def list_channels(): 
 
@@ -66,6 +71,14 @@ def user_channel_history(start_date,candidate_channel,candidate_user):
             message_text=message_text_final(message["text"])
             print "\"%s\",\"%s\",\"%s\",\"%s\"" % (
                 channel,user_real_name,message_ts,message_text)
+
+#-------------------------------------------------
+def channel_id(channel_key):
+    for channel in channels["channels"]:
+        if  channel["id"]  == channel_key \
+        or  channel["name"] == channel_key:
+            return channel["id"]
+    return None
 
 #-------------------------------------------------
 def channel_name(candidate_channel_id):
@@ -111,14 +124,18 @@ def list_users():
         sys.exit(3)
         
 #-------------------------------------------------
-def first_user_id():
-    return users["members"][0]["id"]
-
-#-------------------------------------------------
 def get_user_real_name_by_id(candidate_member_id):
     for member in users["members"]:
         if member["id"] == candidate_member_id:
             return member["profile"]["real_name"]
+    return None
+
+#-------------------------------------------------
+def user_id(user_key):
+    for member in users["members"]:
+        if  member["id"] == user_key \
+        or  member["profile"]["real_name"] == user_key :
+            return member["id"]
     return None
 
 #-------------------------------------------------
