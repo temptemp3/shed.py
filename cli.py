@@ -1,41 +1,41 @@
 #!/usr/bin/python
 ## cli.py
 ## - cli for python slack history export daily
-## version 0.0.1 - initial
+## version 0.0.2 - working
 ##################################################
 ## imports
 ##################################################
-import getopt, sys
+import getopt
+import sys
 from datetime import date
-from string import split
+from time import strptime
 ##################################################
 ## functions
 ##################################################
+start_date=date.today().timetuple()
 def on_date(candidate_date):
 
     global start_date
-
-    start_date=date.today()
-    date_yy_mm_dd=split(candidate_date,"-",3)
-    if len(date_yy_mm_dd) == 3:
-        year=date_yy_mm_dd[0]
-        month=date_yy_mm_dd[1]
-        day=date_yy_mm_dd[2]
-        try:
-            start_date=date(
-                    int(year),int(month),int(day))
-        except ValueError as err:
-            print str(err)
-            sys.exit(3)
+    
+    try:
+        start_date=strptime(candidate_date, "%Y-%m-%d")
+    except ValueError as err:
+        print "malformed start date"
+        print "format:"
+        print " YYYY-MM-DD"
+        print "example:"
+        print " 2018-06-16"
+        sys.exit(3)
 
 #-------------------------------------------------
 # to do:
 # + only accept first user provided
+users=[]
 def on_user(candidate_user):
 
     global user
 
-    user=candidate_user
+    users.append(candidate_user)
 
 #-------------------------------------------------
 channels=[]
@@ -78,7 +78,7 @@ def test_args():
     if 'start_date' not in globals():
         print 'start date not specified'
         sys.exit(1)
-    if 'user' not in globals():
+    if 'users' not in globals() or len(users) <= 0 :
         print 'user not specified'
         sys.exit(1)
     if 'channels' not in globals() or len(channels) <= 0 :
