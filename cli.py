@@ -1,7 +1,7 @@
 #!/usr/bin/python
 ## cli.py
 ## - cli for python slack history export daily
-## version 0.0.2 - working
+## version 0.0.3 - empty channel behavior
 ##################################################
 ## imports
 ##################################################
@@ -81,9 +81,10 @@ def test_args():
     if 'users' not in globals() or len(users) <= 0 :
         print 'user not specified'
         sys.exit(1)
-    if 'channels' not in globals() or len(channels) <= 0 :
-        print 'channels not specified'
-        sys.exit(1)
+    ## empy channel behavior
+    #if 'channels' not in globals() or len(channels) <= 0 :
+    #    print 'channels not specified'
+    #    sys.exit(1)
 
 #-------------------------------------------------
 def try_handle_args():

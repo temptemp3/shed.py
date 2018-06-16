@@ -1,7 +1,7 @@
 #!/usr/bin/python
 ## shed.py
 ## - ptyhon slack history export daily
-## version 0.0.4 - accept human-friendly arguments
+## version 0.0.5 - empty channel behavior
 ##################################################
 ## imports
 ##################################################
@@ -12,9 +12,16 @@ import slack
 ##################################################
 def shed():
     for user in cli.users:
-        for channel in cli.channels:
+        for channel in channels():
             slack.user_channel_history(
                 cli.start_date,slack.channel_id(channel),slack.user_id(user))
+
+#-------------------------------------------------
+def channels():
+    if not cli.channels:
+        return slack.channel_ids()
+    else:
+        return cli.channels
 
 #-------------------------------------------------
 def main():

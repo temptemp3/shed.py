@@ -1,7 +1,7 @@
 #!/usr/bin/python
 ## slack.py
 ## - slack functions
-## version 0.0.3 - support human-friendly arguments
+## version 0.0.4 - channel_ids
 ##################################################
 #
 #    METHODS
@@ -25,6 +25,14 @@ from slackclient import SlackClient
 ##################################################
 ## functions
 ##################################################
+def channel_ids():
+    channel_ids=[]
+    for channel in channels["channels"]:
+        channel_ids.append(
+            channel["id"])
+    return channel_ids
+
+#-------------------------------------------------
 def list_channel_names():
     for channel in channels["channels"]:
         print channel["name"]
