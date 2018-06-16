@@ -1,18 +1,17 @@
 #!/usr/bin/python
 ## cli.py
 ## - cli for python slack history export daily
-## version 0.0.3 - empty channel behavior
+## version 0.0.4 - no args behavior
 ##################################################
 ## imports
 ##################################################
 import getopt
 import sys
-from datetime import date
 from time import strptime
 ##################################################
 ## functions
 ##################################################
-start_date=date.today().timetuple()
+start_date=""
 def on_date(candidate_date):
 
     global start_date
@@ -28,8 +27,6 @@ def on_date(candidate_date):
         sys.exit(3)
 
 #-------------------------------------------------
-# to do:
-# + only accept first user provided
 users=[]
 def on_user(candidate_user):
 
@@ -51,10 +48,12 @@ def handle_args():
     try:
         opts, args = getopt.getopt(sys.argv[1:], "d:u:c:", [])
     except getopt.GetoptError as err:
+        ## no args behavior
         # print help information and exit:
-        print str(err)  # will print something like "option -a not recognized"
+        #print str(err)  # will print something like "option -a not recognized"
         #usage()
-        sys.exit(2)
+        #sys.exit(2)
+        return
     output = None
     verbose = False
     for o, a in opts:
@@ -75,16 +74,19 @@ def test_args():
     # conditions:
     # 1. have start_date and user
     # 1. channels is not empty
-    if 'start_date' not in globals():
-        print 'start date not specified'
-        sys.exit(1)
-    if 'users' not in globals() or len(users) <= 0 :
-        print 'user not specified'
-        sys.exit(1)
+    ## empyt start_date behavior
+    #if 'start_date' not in globals():
+    #    print 'start date not specified'
+    #    sys.exit(1)
+    ## empty user behavior
+    #if 'users' not in globals() or len(users) <= 0 :
+    #    print 'user not specified'
+    #    sys.exit(1)
     ## empy channel behavior
     #if 'channels' not in globals() or len(channels) <= 0 :
     #    print 'channels not specified'
     #    sys.exit(1)
+    pass
 
 #-------------------------------------------------
 def try_handle_args():

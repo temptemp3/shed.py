@@ -1,7 +1,7 @@
 #!/usr/bin/python
 ## slack.py
 ## - slack functions
-## version 0.0.4 - channel_ids
+## version 0.0.5 - user-channel-history, users_ids
 ##################################################
 #
 #    METHODS
@@ -69,16 +69,21 @@ def message_text_final(candidate_message_text):
     return candidate_message_text
 
 #-------------------------------------------------
-def user_channel_history(start_date,candidate_channel,candidate_user):
-    user_real_name=get_user_real_name_by_id(candidate_user)
-    channel=channel_name(candidate_channel)
-    channel_history(candidate_channel,start_date)
-    for message in history["messages"]:
-        if 'user' in message and message["user"] == candidate_user:
-	    message_ts=message_ts_ftime(message["ts"])
-            message_text=message_text_final(message["text"])
-            print "\"%s\",\"%s\",\"%s\",\"%s\"" % (
-                channel,user_real_name,message_ts,message_text)
+def user_channel_history(start_date,channels,users):
+    for channel in channels:
+        for message in channel_history(channel,start_date):
+            if 'user' in message and message["user"] in users:
+                user_real_name=get_user_real_name_by_id(
+                    message["user"])
+	        message_ts=message_ts_ftime(
+                    message["ts"])
+                message_text=message_text_final(
+                    message["text"])
+                print "\"%s\",\"%s\",\"%s\",\"%s\"" % (
+                    channel_name(channel),
+                    user_real_name,
+                    message_ts,
+                    message_text)
 
 #-------------------------------------------------
 def channel_id(channel_key):
@@ -99,7 +104,7 @@ def channel_name(candidate_channel_id):
 # channels.history
 def channel_history(candidate_channel,start_date):
 
-    global history
+    history=[]
 
     start_date_ts=(
         calendar.timegm(start_date))
@@ -108,13 +113,27 @@ def channel_history(candidate_channel,start_date):
         "channels.history",
         channel=candidate_channel, 
         oldest=start_date_ts,
-        count=1000
-    )
+        count=1000)
 
     if response["ok"] == True :
-        history=response
-    else :
-        sys.exit(2)
+        history=response["messages"]
+    else:
+        ## not ok but ok
+        ## - better allow for now due to errors
+        ##   when testing no args behavior
+        ## + may look into later
+        #sys.exit(2)
+        pass
+
+    return history
+
+#-------------------------------------------------
+def user_ids():
+    user_ids=[]
+    for user in users['members']:
+        user_ids.append(
+            user['id'])
+    return user_ids
 
 #-------------------------------------------------
 # users.list

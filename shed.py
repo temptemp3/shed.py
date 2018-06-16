@@ -1,20 +1,33 @@
 #!/usr/bin/python
 ## shed.py
 ## - ptyhon slack history export daily
-## version 0.0.5 - empty channel behavior
+## version 0.0.6 - no args behavior
 ##################################################
 ## imports
 ##################################################
+from datetime import date
+#-------------------------------------------------
 import cli
 import slack
 ##################################################
 ## functions
 ##################################################
 def shed():
-    for user in cli.users:
-        for channel in channels():
-            slack.user_channel_history(
-                cli.start_date,slack.channel_id(channel),slack.user_id(user))
+    ## debug
+    #print "start date: %s" % start_date
+    #print "users: %s" % users
+    #print "channels: %s" % channels
+    slack.user_channel_history(
+        start_date,
+        channels,
+        users)
+
+#-------------------------------------------------
+def start_date():
+    if not cli.start_date:
+        return date.today().timetuple()
+    else:
+        return cli.start_date
 
 #-------------------------------------------------
 def channels():
@@ -24,9 +37,26 @@ def channels():
         return cli.channels
 
 #-------------------------------------------------
+def users():
+    if not cli.users:
+        return slack.user_ids()
+    else:
+        return cli.users
+
+#-------------------------------------------------
+def initialize_globals():
+    global start_date
+    global channels
+    global users
+    start_date=start_date()
+    channels=channels()
+    users=users()
+
+#-------------------------------------------------
 def main():
     cli.try_handle_args()
     slack.initialize()
+    initialize_globals()
     shed()
 
 #-------------------------------------------------
