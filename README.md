@@ -12,6 +12,14 @@
 
  1. [install python-slackclient](https://github.com/slackapi/python-slackclient#requirements-and-installation)
 
+
+**environment**
+
+```
+alias shed='python /path/to/shed.py'
+SLACK_API_TOKEN='your-slack-api-token'
+```
+
 **usage**
 
 ```
