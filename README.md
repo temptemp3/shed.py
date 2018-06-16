@@ -2,11 +2,9 @@
 
 [shed.sh](https://github.com/temptemp3/shed.sh) in python
 
-## requirements and installation
-
 **requirements and instalation**
 
-requires [python-slackclient](python-slackclient)
+requires <u>python-slackclient</u>
 
 ```
 pip install slackclient
