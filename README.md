@@ -12,6 +12,11 @@
 
  1. [install python-slackclient](https://github.com/slackapi/python-slackclient#requirements-and-installation)
 
+```
+pip install slackclient
+```
+
+see [python-slackclient installation and requirements](https://github.com/slackapi/python-slackclient#requirements-and-installation)
 
 **environment**
 
