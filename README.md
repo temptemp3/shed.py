@@ -4,19 +4,15 @@
 
 ## requirements and installation
 
-**requirements**
+**requirements and instalation**
 
- + [python-slackclient](python-slackclient)
- 
-**instalation**
-
- 1. [install python-slackclient](https://github.com/slackapi/python-slackclient#requirements-and-installation)
+requires [python-slackclient](python-slackclient)
 
 ```
 pip install slackclient
 ```
 
-see [python-slackclient installation and requirements](https://github.com/slackapi/python-slackclient#requirements-and-installation)
+see [python-slackclient requirements and installation](https://github.com/slackapi/python-slackclient#requirements-and-installation)
 
 **environment**
 
