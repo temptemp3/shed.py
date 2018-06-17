@@ -2,7 +2,7 @@
 
 [shed.sh](https://github.com/temptemp3/shed.sh) in python
 
-**requirements and instalation**
+**requirements and installation**
 
 requires python-slackclient
 
@@ -41,5 +41,5 @@ shed -dcu
 
 -d - start date (default: date today)
 -c - channel name or id (default: all channels)
--u - user name or id (default all uesrs)
+-u - user name or id (default all users)
 ```
