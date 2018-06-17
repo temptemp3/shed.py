@@ -14,21 +14,21 @@ see [python-slackclient requirements and installation](https://github.com/slacka
 
 **environment and setting**
 
-- (optional) add alias to .bashrc
+(optional) add alias to .bashrc
 
 ```
 alias shed='python /path/to/shed.py'
 ```
 
-- set slack api token
+set slack api token
 
-using environment
+(option i) use environment
 
 ```
 SLACK_API_TOKEN='your-slack-api-token'
 ```
 
-using slack_config file
+(option ii) use slack_config file
 
 copy [slack_confing_sample](https://github.com/temptemp3/shed.py/blob/master/slack_config_sample.py) to slack_config
 
