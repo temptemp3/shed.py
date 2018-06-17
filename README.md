@@ -2,6 +2,16 @@
 
 [shed.sh](https://github.com/temptemp3/shed.sh) in python
 
+**usage**
+
+```
+shed -dcu
+
+-d - start date (default: date today)
+-c - channel name or id (default: all channels)
+-u - user name or id (default all users)
+```
+
 **requirements and installation**
 
 requires python-slackclient
@@ -33,13 +43,3 @@ SLACK_API_TOKEN='your-slack-api-token'
 copy [slack_confing_sample](https://github.com/temptemp3/shed.py/blob/master/slack_config_sample.py) to slack_config
 
 set SLACK_API_TOKEN in slack_config
-
-**usage**
-
-```
-shed -dcu
-
--d - start date (default: date today)
--c - channel name or id (default: all channels)
--u - user name or id (default all users)
-```
