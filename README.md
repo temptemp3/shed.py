@@ -2,6 +2,10 @@
 
 [shed.sh](https://github.com/temptemp3/shed.sh) in python
 
+shed.py  
+
+\- export slack history
+
 **usage**
 
 ```
