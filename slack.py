@@ -1,7 +1,7 @@
 #!/usr/bin/python
 ## slack.py
 ## - slack functions
-## version 0.0.5 - user-channel-history, users_ids
+## version 0.0.6 - slack token config
 ##################################################
 #
 #    METHODS
@@ -22,6 +22,12 @@ import calendar
 from calendar import timegm
 #-------------------------------------------------
 from slackclient import SlackClient
+#-------------------------------------------------
+try:
+    import slack_config
+    config_slack_token=slack_config.slack_token
+except ImportError:
+    config_slack_token=''
 ##################################################
 ## functions
 ##################################################
@@ -195,7 +201,10 @@ def initialize_client():
 
     global sc
 
-    slack_token = os.environ["SLACK_API_TOKEN"]
+    if not config_slack_token:
+        slack_token = os.environ["SLACK_API_TOKEN"]
+    else:
+        slack_token = config_slack_token
 
     sc = SlackClient(slack_token)
 
