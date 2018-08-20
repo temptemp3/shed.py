@@ -37,9 +37,7 @@ def on_user(candidate_user):
 #-------------------------------------------------
 channels=[]
 def on_channel(candidate_channel):
-
     global channels
-
     channels.append(candidate_channel)
 
 #-------------------------------------------------

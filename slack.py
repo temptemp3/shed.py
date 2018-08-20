@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf8 -*-
 ## slack.py
 ## - slack functions
 ## version 0.0.6 - slack token config
@@ -40,8 +41,9 @@ def channel_ids():
 
 #-------------------------------------------------
 def list_channel_names():
+    print "available channels:"
     for channel in channels["channels"]:
-        print channel["name"]
+	print "-c %s" % channel["name"]
 
 #-------------------------------------------------
 # channels.list
@@ -79,12 +81,24 @@ def user_channel_history(start_date,channels,users):
     for channel in channels:
         for message in channel_history(channel,start_date):
             if 'user' in message and message["user"] in users:
-                user_real_name=get_user_real_name_by_id(
-                    message["user"])
+                #user_real_name=get_user_real_name_by_id(
+                #    message["user"])
+                user_real_name="user"
 	        message_ts=message_ts_ftime(
                     message["ts"])
+                #---------------------------------
+		# message text
+                #---------------------------------
+                #message_text=message["text"]
                 message_text=message_text_final(
                     message["text"])
+                if message_text == '':
+                    continue
+		try:
+			print message_text
+		except UnicodeEncodeError:
+			message_text="%s %s" % ("STRING",len(message_text))
+                #---------------------------------
                 print "\"%s\",\"%s\",\"%s\",\"%s\"" % (
                     channel_name(channel),
                     user_real_name,
@@ -211,6 +225,7 @@ def initialize_client():
 #-------------------------------------------------
 def initialize_globals():
     list_channels()
+    list_channel_names()
     list_users()
 
 #-------------------------------------------------

@@ -17,6 +17,7 @@ def shed():
     #print "start date: %s" % start_date
     #print "users: %s" % users
     #print "channels: %s" % channels
+    #return
     slack.user_channel_history(
         start_date,
         channels,
@@ -34,6 +35,7 @@ def channels():
     if not cli.channels:
         return slack.channel_ids()
     else:
+        return map(slack.channel_id,cli.channels)
         return cli.channels
 
 #-------------------------------------------------
