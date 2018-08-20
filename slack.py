@@ -229,7 +229,7 @@ def initialize_client():
 #-------------------------------------------------
 def initialize_globals():
     list_channels()
-    list_channel_names()
+    #list_channel_names()
     list_users()
 
 #-------------------------------------------------
