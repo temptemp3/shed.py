@@ -92,12 +92,17 @@ def user_channel_history(start_date,channels,users):
                 #message_text=message["text"]
                 message_text=message_text_final(
                     message["text"])
+                #---------------------------------
+                # skip messages with blank text
                 if message_text == '':
                     continue
-		try:
-			print message_text
-		except UnicodeEncodeError:
-			message_text="%s %s" % ("STRING",len(message_text))
+                #---------------------------------
+                # experimental workaround for unicode encode error
+                # - can fix by setting appropriate environment settings
+		#try:
+		#	print message_text
+		#except UnicodeEncodeError:
+		#	message_text="%s %s" % ("STRING",len(message_text))
                 #---------------------------------
                 print "\"%s\",\"%s\",\"%s\",\"%s\"" % (
                     channel_name(channel),
@@ -207,7 +212,6 @@ def user_info(candidate_user):
 
 #-------------------------------------------------
 def payload():
-
     print 'done'
 
 #-------------------------------------------------
