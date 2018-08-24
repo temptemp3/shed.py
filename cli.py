@@ -29,9 +29,7 @@ def on_date(candidate_date):
 #-------------------------------------------------
 users=[]
 def on_user(candidate_user):
-
     global user
-
     users.append(candidate_user)
 
 #-------------------------------------------------
@@ -42,7 +40,6 @@ def on_channel(candidate_channel):
 
 #-------------------------------------------------
 def handle_args():
-
     try:
         opts, args = getopt.getopt(sys.argv[1:], "d:u:c:", [])
     except getopt.GetoptError as err:
@@ -57,12 +54,15 @@ def handle_args():
     for o, a in opts:
         if o in ("-d"):
 	    on_date(a)
+            ## debug
             #print start_date
     	elif o in ("-u"):
 	    on_user(a)
-            #print user
+            ## debug
+            #print users
     	elif o in ("-c"):
 	    on_channel(a)
+            ## debug
             #print channels
         else:
             assert False, "unhandled option"

@@ -43,7 +43,8 @@ def users():
     if not cli.users:
         return slack.user_ids()
     else:
-        return cli.users
+        return list(filter(lambda u: u is not None,
+            list(map(lambda u:slack.user_id(u),cli.users))))
 
 #-------------------------------------------------
 def initialize_globals():

@@ -1,7 +1,7 @@
 #!/usr/bin/python
-# -*- coding: utf8 -*-
+# -*- coding: UTF8 -*-
 ## slack.py
-## - slack functions
+## - slack functions 
 ## version 0.0.6 - slack token config
 ##################################################
 #
@@ -81,9 +81,12 @@ def user_channel_history(start_date,channels,users):
     for channel in channels:
         for message in channel_history(channel,start_date):
             if 'user' in message and message["user"] in users:
-                #user_real_name=get_user_real_name_by_id(
-                #    message["user"])
-                user_real_name="user"
+                #---------------------------------
+                # user real name
+                user_real_name=get_user_real_name_by_id(
+                    message["user"])
+                #---------------------------------
+                #user_real_name="user"
 	        message_ts=message_ts_ftime(
                     message["ts"])
                 #---------------------------------
@@ -184,10 +187,12 @@ def get_user_real_name_by_id(candidate_member_id):
 
 #-------------------------------------------------
 def user_id(user_key):
+    safe_user_key=user_key.decode('shift-jis')
     for member in users["members"]:
-        if  member["id"] == user_key \
-        or  member["profile"]["real_name"] == user_key :
+        if  member["id"] == safe_user_key \
+        or  member["profile"]["real_name"] == safe_user_key :
             return member["id"]
+
     return None
 
 #-------------------------------------------------
@@ -197,14 +202,8 @@ def user_real_name():
 #-------------------------------------------------
 # users.info
 def user_info(candidate_user):
-
     global info
-    
-    response = sc.api_call(
-        "users.info",
-        user=candidate_user
-    )
-
+    response = sc.api_call("users.info",user=candidate_user)
     if response["ok"] == True :
         info=response
     else :
@@ -216,9 +215,7 @@ def payload():
 
 #-------------------------------------------------
 def initialize_client():
-
     global sc
-
     if not config_slack_token:
         slack_token = os.environ["SLACK_API_TOKEN"]
     else:
